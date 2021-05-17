@@ -13,6 +13,12 @@
 		6F30ADEF26530253002C8A9E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6F30ADED26530253002C8A9E /* Main.storyboard */; };
 		6F30ADF126530255002C8A9E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6F30ADF026530255002C8A9E /* Assets.xcassets */; };
 		6F30ADF426530255002C8A9E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6F30ADF226530255002C8A9E /* LaunchScreen.storyboard */; };
+		6F30AE1B26530334002C8A9E /* UITableView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F30AE1A26530334002C8A9E /* UITableView+Extensions.swift */; };
+		6F30AE1F26530463002C8A9E /* InstagramTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F30AE1D26530463002C8A9E /* InstagramTableViewCell.swift */; };
+		6F30AE2026530463002C8A9E /* InstagramTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F30AE1E26530463002C8A9E /* InstagramTableViewCell.xib */; };
+		6F30AE2326530491002C8A9E /* UIImageView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F30AE2226530491002C8A9E /* UIImageView+Extensions.swift */; };
+		6F30AE2626530AEC002C8A9E /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F30AE2526530AEC002C8A9E /* Post.swift */; };
+		6F6883C526531575005565C2 /* NSMutableAttributtedString+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F6883C426531575005565C2 /* NSMutableAttributtedString+Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +30,12 @@
 		6F30ADF026530255002C8A9E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6F30ADF326530255002C8A9E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6F30ADF526530255002C8A9E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6F30AE1A26530334002C8A9E /* UITableView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Extensions.swift"; sourceTree = "<group>"; };
+		6F30AE1D26530463002C8A9E /* InstagramTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstagramTableViewCell.swift; sourceTree = "<group>"; };
+		6F30AE1E26530463002C8A9E /* InstagramTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InstagramTableViewCell.xib; sourceTree = "<group>"; };
+		6F30AE2226530491002C8A9E /* UIImageView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extensions.swift"; sourceTree = "<group>"; };
+		6F30AE2526530AEC002C8A9E /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
+		6F6883C426531575005565C2 /* NSMutableAttributtedString+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSMutableAttributtedString+Extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,15 +68,53 @@
 		6F30ADE626530253002C8A9E /* SocialNetwork */ = {
 			isa = PBXGroup;
 			children = (
+				6F30ADFF2653027A002C8A9E /* Model */,
+				6F30ADFE26530272002C8A9E /* ViewControllers */,
+				6F30ADFD2653026B002C8A9E /* CustomCells */,
+				6F30ADFC2653025D002C8A9E /* Extensions */,
 				6F30ADE726530253002C8A9E /* AppDelegate.swift */,
 				6F30ADE926530253002C8A9E /* SceneDelegate.swift */,
-				6F30ADEB26530253002C8A9E /* ViewController.swift */,
 				6F30ADED26530253002C8A9E /* Main.storyboard */,
 				6F30ADF026530255002C8A9E /* Assets.xcassets */,
 				6F30ADF226530255002C8A9E /* LaunchScreen.storyboard */,
 				6F30ADF526530255002C8A9E /* Info.plist */,
 			);
 			path = SocialNetwork;
+			sourceTree = "<group>";
+		};
+		6F30ADFC2653025D002C8A9E /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				6F30AE1A26530334002C8A9E /* UITableView+Extensions.swift */,
+				6F30AE2226530491002C8A9E /* UIImageView+Extensions.swift */,
+				6F6883C426531575005565C2 /* NSMutableAttributtedString+Extensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		6F30ADFD2653026B002C8A9E /* CustomCells */ = {
+			isa = PBXGroup;
+			children = (
+				6F30AE1D26530463002C8A9E /* InstagramTableViewCell.swift */,
+				6F30AE1E26530463002C8A9E /* InstagramTableViewCell.xib */,
+			);
+			path = CustomCells;
+			sourceTree = "<group>";
+		};
+		6F30ADFE26530272002C8A9E /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				6F30ADEB26530253002C8A9E /* ViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		6F30ADFF2653027A002C8A9E /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				6F30AE2526530AEC002C8A9E /* Post.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -124,6 +174,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6F30AE2026530463002C8A9E /* InstagramTableViewCell.xib in Resources */,
 				6F30ADF426530255002C8A9E /* LaunchScreen.storyboard in Resources */,
 				6F30ADF126530255002C8A9E /* Assets.xcassets in Resources */,
 				6F30ADEF26530253002C8A9E /* Main.storyboard in Resources */,
@@ -137,9 +188,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6F30AE2326530491002C8A9E /* UIImageView+Extensions.swift in Sources */,
+				6F30AE1F26530463002C8A9E /* InstagramTableViewCell.swift in Sources */,
 				6F30ADEC26530253002C8A9E /* ViewController.swift in Sources */,
 				6F30ADE826530253002C8A9E /* AppDelegate.swift in Sources */,
 				6F30ADEA26530253002C8A9E /* SceneDelegate.swift in Sources */,
+				6F30AE2626530AEC002C8A9E /* Post.swift in Sources */,
+				6F30AE1B26530334002C8A9E /* UITableView+Extensions.swift in Sources */,
+				6F6883C526531575005565C2 /* NSMutableAttributtedString+Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
