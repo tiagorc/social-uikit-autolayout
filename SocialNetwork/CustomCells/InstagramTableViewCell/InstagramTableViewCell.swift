@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol InstagramTableViewCellResponder: AnyObject {
+    func didSelectUser(post: Post?, user: User?)
+}
+
 class InstagramTableViewCell: UITableViewCell {
     
     @IBOutlet weak var profileUserImage: UIImageView!
@@ -24,7 +28,10 @@ class InstagramTableViewCell: UITableViewCell {
     @IBOutlet weak var secondLiker: UIImageView!
     @IBOutlet weak var thirdLiker: UIImageView!
     
-    private let kUsername = "eulertiago"
+    weak var responder: InstagramTableViewCellResponder?
+    
+    private var post: Post?
+    private var user: User?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -32,24 +39,22 @@ class InstagramTableViewCell: UITableViewCell {
         selectionStyle = .none
     }
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-    
-    func bind(post: Post) {
+    func bind(post: Post, user: User?, responder: InstagramTableViewCellResponder) {
+        self.responder = responder
         
-        profileUserImage.imageFromServerURL("http://lorempixel.com.br/\(32)/\(32)", placeHolder: nil)
+        self.post = post
+        self.user = user
+        
+        profileUserImage.imageFromServerURL("http://lorempixel.com.br/\(32)/\(32)")
         profileUserImage.layer.cornerRadius = profileUserImage.frame.width/2.0
         
-        firstLiker.imageFromServerURL("http://lorempixel.com.br/12/12", placeHolder: nil)
+        firstLiker.imageFromServerURL("http://lorempixel.com.br/12/12")
         firstLiker.layer.cornerRadius = firstLiker.frame.width/2.0
         
-        secondLiker.imageFromServerURL("http://lorempixel.com.br/12/12", placeHolder: nil)
+        secondLiker.imageFromServerURL("http://lorempixel.com.br/12/12")
         secondLiker.layer.cornerRadius = secondLiker.frame.width/2.0
         
-        thirdLiker.imageFromServerURL("http://lorempixel.com.br/12/12", placeHolder: nil)
+        thirdLiker.imageFromServerURL("http://lorempixel.com.br/12/12")
         thirdLiker.layer.cornerRadius = thirdLiker.frame.width/2.0
         
         let side = Int(UIScreen.main.nativeBounds.size.width)
@@ -57,8 +62,10 @@ class InstagramTableViewCell: UITableViewCell {
         let placeholder = UIImage(named: "placeholder")
         postImageView.imageFromServerURL("http://lorempixel.com.br/\(side)/\(side)", placeHolder: placeholder)
         
+        guard let user = user else { return }
+        
         profileUserName.attributedText = NSMutableAttributedString()
-            .bold( "\(kUsername) • ")
+            .bold( "\(user.username?.lowercased() ?? "") • ")
         
         likersLabel.attributedText = NSMutableAttributedString()
             .normal("Liked by ")
@@ -68,7 +75,7 @@ class InstagramTableViewCell: UITableViewCell {
         
         legendLabel.attributedText =
             NSMutableAttributedString()
-            .bold(kUsername)
+            .bold(user.username?.lowercased() ?? "")
             .normal(" \(post.title)" )
     }
     
@@ -90,4 +97,7 @@ class InstagramTableViewCell: UITableViewCell {
     @IBAction func userDidClickInOptions(_ sender: Any) {
     }
     
+    @IBAction func userDidSelectShowProfile(_ sender: Any) {
+        responder?.didSelectUser(post: post, user: user)
+    }
 }

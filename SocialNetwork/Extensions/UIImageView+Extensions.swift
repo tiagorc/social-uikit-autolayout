@@ -10,7 +10,7 @@ import UIKit
 let imageCache = NSCache<NSString, UIImage>()
 
 extension UIImageView {
-    func imageFromServerURL(_ URLString: String, placeHolder: UIImage?) {
+    func imageFromServerURL(_ URLString: String, placeHolder: UIImage? = nil) {
         
         self.image = placeHolder
         //If imageurl's imagename has space then this line going to work for this

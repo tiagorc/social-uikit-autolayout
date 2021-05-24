@@ -147,14 +147,22 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dmk-a9-y8d">
+                        <rect key="frame" x="16" y="16" width="134" height="48"/>
+                        <connections>
+                            <action selector="userDidSelectShowProfile:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="WYM-QK-XMt"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="Dmk-a9-y8d" firstAttribute="height" secondItem="gSS-oc-mrl" secondAttribute="height" id="1Jw-FF-T9k"/>
                     <constraint firstItem="KXx-Q2-eXf" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="5Ly-ep-QPr"/>
                     <constraint firstItem="oU6-AD-JIf" firstAttribute="centerY" secondItem="xQY-sU-mX9" secondAttribute="centerY" id="7om-X9-mct"/>
                     <constraint firstItem="bI3-dK-DYD" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="BuA-sC-kKY"/>
                     <constraint firstItem="gSS-oc-mrl" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="DhY-jp-dYd"/>
                     <constraint firstItem="UMb-6G-G4e" firstAttribute="centerY" secondItem="bI3-dK-DYD" secondAttribute="centerY" id="JdV-2m-4jZ"/>
                     <constraint firstItem="UMb-6G-G4e" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="Ke7-q7-p5o"/>
+                    <constraint firstItem="Dmk-a9-y8d" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="Kzt-EB-5nY"/>
                     <constraint firstItem="xQY-sU-mX9" firstAttribute="centerY" secondItem="gSS-oc-mrl" secondAttribute="centerY" id="M1a-JC-RnT"/>
                     <constraint firstItem="Ccm-Y8-6bG" firstAttribute="top" secondItem="bI3-dK-DYD" secondAttribute="bottom" constant="16" id="MfQ-1c-2lS"/>
                     <constraint firstAttribute="trailing" secondItem="gjx-GN-r3o" secondAttribute="trailing" id="OZi-KF-kfC"/>
@@ -163,6 +171,7 @@
                     <constraint firstItem="bI3-dK-DYD" firstAttribute="top" secondItem="gjx-GN-r3o" secondAttribute="bottom" constant="8" symbolic="YES" id="Taz-Iw-cV6"/>
                     <constraint firstAttribute="trailing" secondItem="EpC-UV-iww" secondAttribute="trailing" constant="16" id="XFU-90-O9J"/>
                     <constraint firstAttribute="bottomMargin" secondItem="KXx-Q2-eXf" secondAttribute="bottom" constant="8" id="da3-HL-hwP"/>
+                    <constraint firstItem="Dmk-a9-y8d" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="16" id="dhX-9d-Omc"/>
                     <constraint firstAttribute="trailingMargin" secondItem="KXx-Q2-eXf" secondAttribute="trailing" constant="8" id="efm-9m-PzS"/>
                     <constraint firstItem="gjx-GN-r3o" firstAttribute="top" secondItem="gSS-oc-mrl" secondAttribute="bottom" constant="16" id="fik-P9-dwY"/>
                     <constraint firstItem="Gwm-rD-TOQ" firstAttribute="leading" secondItem="Ccm-Y8-6bG" secondAttribute="trailing" constant="12" id="g9y-BI-rWO"/>
@@ -172,6 +181,7 @@
                     <constraint firstItem="gSS-oc-mrl" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="16" id="vr2-DH-elt"/>
                     <constraint firstItem="KXx-Q2-eXf" firstAttribute="top" secondItem="Gwm-rD-TOQ" secondAttribute="bottom" constant="8" id="wSq-K0-HqN"/>
                     <constraint firstItem="Ccm-Y8-6bG" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="x3S-TL-zqk"/>
+                    <constraint firstItem="oU6-AD-JIf" firstAttribute="leading" secondItem="Dmk-a9-y8d" secondAttribute="trailing" id="zlF-ki-iqC"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
