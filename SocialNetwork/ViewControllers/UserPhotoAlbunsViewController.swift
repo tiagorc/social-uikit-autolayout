@@ -9,16 +9,18 @@ import UIKit
 
 class UserPhotoAlbunsViewController: UIViewController {
     
-    @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var tableView: UITableView!
     
     var user: User?
     var albums: [Album] = [] {
         didSet {
-            collectionView.reloadData()
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
         }
     }
     
-    private let kBaseURL = "https://jsonplaceholder.typicode.com"
+    private let userService = UserService()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,55 +31,42 @@ class UserPhotoAlbunsViewController: UIViewController {
     }
     
     fileprivate func setupCollectionView() {
-        self.collectionView.delegate = self
-        self.collectionView.dataSource = self
-        
-        if let layout = collectionView?.collectionViewLayout as? UICollectionViewFlowLayout {
-                layout.minimumLineSpacing = 10
-                layout.minimumInteritemSpacing = 10
-                layout.sectionInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
-                let size = CGSize(width:(collectionView!.bounds.width-30)/2, height: 250)
-                layout.itemSize = size
-        }
+        self.tableView.delegate = self
+        self.tableView.dataSource = self
+        self.tableView.rowHeight = UITableView.automaticDimension
+        self.tableView.registerCell(type: AlbumPreviewTableViewCell.self)
     }
     
     fileprivate func loadAlbums() {
-        guard let id = user?.id,
-              let url = URL(string: "\(kBaseURL)/users/\(id)/albums") else {
-            return
-        }
-        let session = URLSession.shared
-        let request = URLRequest(url: url)
-        
-        let task = session.dataTask(with: request) { (data, response, error) in
-            if let response = response as? HTTPURLResponse,
-               response.statusCode >= 200,
-               response.statusCode < 300 {
-                guard let data = data,
-                      let albums = try? JSONDecoder().decode([Album].self, from: data) else {
-                    return
-                }
-                
-                DispatchQueue.main.async {
-                    self.albums = albums
-                }
+        guard let id = user?.id else { return }
+        userService.loadAlbums(userId: String(id)) { (albums, error) in
+            guard error == nil, let albums = albums as? [Album] else {
+                return
             }
+            
+            self.albums = albums
         }
-        
-        task.resume()
     }
 }
 
-extension UserPhotoAlbunsViewController: UICollectionViewDelegate, UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        return UICollectionViewCell()
-    }
-    
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
+extension UserPhotoAlbunsViewController: UITableViewDelegate, UITableViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return albums.count
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueCell(withType: AlbumPreviewTableViewCell.self, for: indexPath) as! AlbumPreviewTableViewCell
+        
+        cell.bind(with: albums[indexPath.row])
+        
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return albums[section].title
     }
 }

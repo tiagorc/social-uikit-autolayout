@@ -9,7 +9,7 @@ import Foundation
 
 
 // MARK: - AlbumElement
-struct Album: Codable {
+struct Album: CacheObject {
     let userID, id: Int
     let title: String
 

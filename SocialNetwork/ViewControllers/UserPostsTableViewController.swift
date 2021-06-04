@@ -11,14 +11,16 @@ class UserPostsTableViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     
-    private let kBaseURL = "https://jsonplaceholder.typicode.com"
-    
     var user: User?
     private var posts = [Post]() {
         didSet {
-            tableView.reloadData()
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
         }
     }
+    
+    private let userService = UserService()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,30 +33,22 @@ class UserPostsTableViewController: UIViewController {
         
         self.navigationController?.isNavigationBarHidden = false
         
-        guard let id = user?.id,
-              let url = URL(string: "\(kBaseURL)/posts/\(id)/posts") else {
-            return
-        }
-        let session = URLSession.shared
-        let request = URLRequest(url: url)
-        
-        let task = session.dataTask(with: request) { (data, response, error) in
-            if let response = response as? HTTPURLResponse,
-               response.statusCode >= 200,
-               response.statusCode < 300 {
-                guard let data = data, let posts = try? JSONDecoder().decode([Post].self, from: data) else {
-                    return
-                }
-                
-                DispatchQueue.main.async {
-                    self.posts = posts
-                }
-            }
-        }
-        
-        task.resume()
+        loadPostsForSpecificUser()
     }
 
+    fileprivate func loadPostsForSpecificUser() {
+        guard let id = user?.id else { return }
+        userService.loadPostsForSpecificUser(userId: String(id)) { (posts, error) in
+            guard error == nil, let posts = posts as? [Post] else {
+                return
+            }
+            
+            self.posts = posts
+        }
+        
+        
+    }
+    
     fileprivate func setupTableView() {
         tableView.delegate = self
         tableView.dataSource = self
@@ -82,7 +76,7 @@ extension UserPostsTableViewController: UITableViewDelegate, UITableViewDataSour
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.posts.count + 1
+        return self.posts.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

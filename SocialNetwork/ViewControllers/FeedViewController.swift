@@ -11,19 +11,23 @@ class FeedViewController: UIViewController {
     
     private var posts: [Post] = [] {
         didSet {
-            tableView.reloadData()
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
         }
     }
     
     private var users: [User] = [] {
         didSet {
-            loadPosts()
+            DispatchQueue.main.async {
+                self.loadPosts()
+            }
         }
     }
-    
-    private let kBaseURL = "https://jsonplaceholder.typicode.com/"
 
     @IBOutlet weak var tableView: UITableView!
+    
+    var userService = UserService()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,47 +52,23 @@ class FeedViewController: UIViewController {
     }
     
     fileprivate func loadUsers() {
-        guard let url = URL(string: kBaseURL + "users") else {
-            return
-        }
-        
-        let session = URLSession.shared
-        let request = URLRequest(url: url)
-        
-        session.dataTask(with: request) { (data, response, error) in
-            if let response = response as? HTTPURLResponse,
-               response.statusCode >= 200,
-               response.statusCode < 300 {
-                guard let data = data, let posts = try? JSONDecoder().decode([User].self, from: data) else {
-                    return
-                }
-                
-                self.users = posts
+        userService.loadUsers { (users, error) in
+            guard error == nil, let users = users as? [User] else {
+                return
             }
-        }.resume()
+            
+            self.users = users
+        }
     }
     
     fileprivate func loadPosts() {
-        guard let url = URL(string: kBaseURL + "posts") else {
-            return
-        }
-        
-        let session = URLSession.shared
-        let request = URLRequest(url: url)
-        
-        session.dataTask(with: request) { (data, response, error) in
-            if let response = response as? HTTPURLResponse,
-               response.statusCode >= 200,
-               response.statusCode < 300 {
-                guard let data = data, let posts = try? JSONDecoder().decode([Post].self, from: data) else {
-                    return
-                }
-                
-                DispatchQueue.main.async {
-                    self.posts = posts
-                }
+        userService.loadPosts { (posts, error) in
+            guard error == nil, let posts = posts as? [Post] else {
+                return
             }
-        }.resume()
+            
+            self.posts = posts
+        }
     }
 }
 

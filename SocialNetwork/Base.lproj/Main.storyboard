@@ -5,7 +5,6 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
-        <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -261,13 +260,13 @@
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="sio-0t-Kf3">
                                             <rect key="frame" x="28" y="22.5" width="160" height="46.5"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" tag="10" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nome da Pessoa" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lhc-lL-NeA">
+                                                <label opaque="NO" userInteractionEnabled="NO" tag="10" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Nome da Pessoa" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lhc-lL-NeA">
                                                     <rect key="frame" x="0.0" y="0.0" width="160" height="26.5"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="email@dapessoa.com" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wfp-U4-8H8">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="email@dapessoa.com" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wfp-U4-8H8">
                                                     <rect key="frame" x="0.0" y="28.5" width="149.5" height="18"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                                     <nil key="textColor"/>
@@ -329,44 +328,28 @@
         <!--User Photo Albuns View Controller-->
         <scene sceneID="jkB-id-lp2">
             <objects>
-                <viewController id="cTt-8n-0AO" customClass="UserPhotoAlbunsViewController" sceneMemberID="viewController">
+                <viewController id="cTt-8n-0AO" customClass="UserPhotoAlbunsViewController" customModule="SocialNetwork" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="zan-eb-bV7">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Kcq-Pi-a4M">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="P2d-Ff-KqV">
                                 <rect key="frame" x="0.0" y="88" width="414" height="725"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="7kz-Rk-h0b">
-                                    <size key="itemSize" width="128" height="128"/>
-                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                </collectionViewFlowLayout>
-                                <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="esA-sc-g1O">
-                                        <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="o0o-8W-oIl">
-                                            <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                        </collectionViewCellContentView>
-                                    </collectionViewCell>
-                                </cells>
-                            </collectionView>
+                            </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="UPl-yX-fk5"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="Kcq-Pi-a4M" firstAttribute="leading" secondItem="UPl-yX-fk5" secondAttribute="leading" id="3gn-eL-R4f"/>
-                            <constraint firstItem="Kcq-Pi-a4M" firstAttribute="top" secondItem="UPl-yX-fk5" secondAttribute="top" id="55f-gq-qMM"/>
-                            <constraint firstItem="UPl-yX-fk5" firstAttribute="bottom" secondItem="Kcq-Pi-a4M" secondAttribute="bottom" id="JUO-Yk-0ui"/>
-                            <constraint firstItem="UPl-yX-fk5" firstAttribute="trailing" secondItem="Kcq-Pi-a4M" secondAttribute="trailing" id="Qbc-9L-IjE"/>
+                            <constraint firstItem="P2d-Ff-KqV" firstAttribute="top" secondItem="UPl-yX-fk5" secondAttribute="top" id="gHE-In-fXg"/>
+                            <constraint firstItem="P2d-Ff-KqV" firstAttribute="leading" secondItem="UPl-yX-fk5" secondAttribute="leading" id="gVz-OJ-VFj"/>
+                            <constraint firstItem="UPl-yX-fk5" firstAttribute="trailing" secondItem="P2d-Ff-KqV" secondAttribute="trailing" id="lMh-2i-M06"/>
+                            <constraint firstItem="UPl-yX-fk5" firstAttribute="bottom" secondItem="P2d-Ff-KqV" secondAttribute="bottom" id="vch-33-tIq"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="24c-oZ-zDc"/>
                     <connections>
-                        <outlet property="collectionView" destination="Kcq-Pi-a4M" id="Z7P-W2-YQ6"/>
+                        <outlet property="tableView" destination="P2d-Ff-KqV" id="0wf-by-t5O"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yfl-iQ-kf8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

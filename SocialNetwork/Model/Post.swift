@@ -8,7 +8,7 @@
 import Foundation
 
 // MARK: - Post
-struct Post: Codable, Identifiable {
+struct Post: CacheObject, Identifiable {
     let userID, id: Int
     let title, body: String
 

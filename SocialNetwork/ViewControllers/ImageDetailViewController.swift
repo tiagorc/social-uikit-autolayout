@@ -10,8 +10,10 @@ import UIKit
 class ImageDetailViewController: UIViewController {
     
     var user: User?
-    private let kBaseURL = "https://jsonplaceholder.typicode.com/photos/"
+
     @IBOutlet weak var tableView: UITableView!
+    
+    private let userService = UserService()
     
     var arrImages = [UserImage]() {
         didSet {
@@ -26,25 +28,24 @@ class ImageDetailViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        guard let id = user?.id, let url = URL(string: "\(kBaseURL)\(id)/photos") else { return }
-        let session = URLSession.shared
-        let request = URLRequest(url: url)
         
-        let task = session.dataTask(with: request) { (data, resp, error) in
-            if let response = resp as? HTTPURLResponse, response.statusCode >= 200 && response.statusCode < 300 {
-                if let users = try? JSONDecoder().decode([UserImage].self, from: data!) {
-                    DispatchQueue.main.async {
-                        self.arrImages = users
-                    }
-                }
-            }
-        }
-        task.resume()
+        loadPhotos()
     }
     
     fileprivate func setupTableView() {
         tableView.delegate = self
         tableView.dataSource = self
+    }
+    
+    fileprivate func loadPhotos() {
+        guard let userId = user?.id else { return }
+        userService.loadPhotosFromUser(userId: String(userId)) { (photos, error) in
+            guard error == nil, let photos = photos as? [UserImage] else {
+                return
+            }
+            
+            self.arrImages = photos
+        }
     }
 }
 

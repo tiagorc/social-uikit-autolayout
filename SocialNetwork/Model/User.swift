@@ -7,14 +7,17 @@
 
 import Foundation
 
-
 // MARK: - User
-struct User: Codable, Identifiable {
+struct User: CacheObject, Identifiable {
     let id: Int?
     let name, username, email: String?
     let address: Address?
     let phone, website: String?
     let company: Company?
+    
+    func saveInCache() {
+        CoredataContext.saveContext()
+    }
 }
 
 // MARK: - Address

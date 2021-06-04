@@ -21,6 +21,8 @@ class ListUserViewController: UITableViewController {
         }
     }
     
+    private let userService = UserService()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -35,21 +37,12 @@ class ListUserViewController: UITableViewController {
     }
     
     fileprivate func loadUsers() {
-        if let url = URL(string: "\(kBaseURL)/users") {
-            let session = URLSession.shared
-
-            let request = URLRequest(url: url)
-            
-            let task = session.dataTask(with: request) { (data, resp, error) in
-                if let response = resp as? HTTPURLResponse, response.statusCode >= 200 && response.statusCode < 300 {
-                    if let users = try? JSONDecoder().decode([User].self, from: data!) {
-                        DispatchQueue.main.async {
-                            self.users = users
-                        }
-                    }
-                }
+        userService.loadUsers { (users, error) in
+            guard error == nil, let users = users as? [User] else {
+                return
             }
-            task.resume()
+            
+            self.users = users
         }
     }
     

@@ -8,7 +8,7 @@
 import Foundation
 
 // MARK: - UserImage
-struct UserImage: Codable, Identifiable {
+struct UserImage: CacheObject, Identifiable {
     let albumID, id: Int
     let title: String
     let url, thumbnailURL: String
